@@ -53,7 +53,7 @@ Efficiency_check = (1 - (Q_out / Q_in)) * 100
 # Printing Values of pressure at different stages
 print(f"Initial Pressure P1= {P1:.2f} Pa")
 print(f"After isentropic compression P2= {P2:.2f} Pa")
-print(f"After isochoric heat addition P3= {P3:.2f} Pa")
+print(f"After isobaric heat addition P3= {P3:.2f} Pa")
 print(f"After isentropic expansion P4= {P4:.2f} Pa")
 print(f"The efficiency of the cycle = {Efficiency:.2f}")
 print(f"Checking the efficiency = {Efficiency_check:.2f}")
@@ -80,6 +80,13 @@ plt.title("Diesel cycle PV diagram", color="r")
 plt.xlabel("Volume(m^3/kg)")
 plt.ylabel("Pressure(Pa)")
 plt.grid(True, linestyle="--")
+points_V = [V1,V2,V3,V4]
+points_P = [P1,P2,P3,P4]
+labels = ['1','2','3','4']
+plt.scatter(points_V,points_P, color = 'k' , zorder =5)
+for x,y,label in zip(points_V,points_P,labels):
+    plt.annotate(label,(x,y), xytext=(5,5),textcoords="offset points",fontsize = 10,fontweight = 'normal')
+
 plt.legend()
 # plt.show()
 
@@ -98,12 +105,18 @@ T41 = T4 * np.exp((S41 - S4) / Cv)
 
 plt.figure(figsize=(10, 8))
 plt.plot(S12, T12, color="b", linestyle="--", label="1->2 Isentropic Compression")
-plt.plot(S23, T23, color="g", linestyle="--", label="2->3 Isochoric Heat Addition")
+plt.plot(S23, T23, color="g", linestyle="--", label="2->3 Isobaric Heat Addition")
 plt.plot(S34, T34, color="r", linestyle="--", label="3->4 Isentropic Expansion")
 plt.plot(S41, T41, color="m", linestyle="--", label="4->1 Isochoric Heat Rejection")
 plt.title("Diesel cycle TS diagram", color="r")
 plt.xlabel("Entropy(J/K)")
 plt.ylabel("Temperature(K)")
 plt.grid(True, linestyle="--")
+points_S = [S1,S2,S3,S4]
+points_T = [T1,T2,T3,T4]
+labels = ['1','2','3','4']
+plt.scatter(points_S,points_T, color ='k',zorder = 4)
+for x,y,label in zip(points_S,points_T,labels):
+    plt.annotate(label,(x,y), xytext = (8,8), textcoords='offset points',fontsize = 10)
 plt.legend()
 plt.show()
